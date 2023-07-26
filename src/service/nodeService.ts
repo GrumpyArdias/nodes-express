@@ -1,10 +1,11 @@
 import fs from "fs";
 import { nodeType } from "../@types/nodes";
+import nodes from "./node.json";
 
 export const getAllNodes = () => {
-  if (fs.existsSync("./node.json")) {
+  if (fs.existsSync(`${__dirname}/node.json`)) {
     const nodes: nodeType[] = JSON.parse(
-      fs.readFileSync("./node.json", "utf-8")
+      fs.readFileSync(`${__dirname}/node.json`, "utf-8")
     );
     return nodes;
   }
@@ -18,7 +19,10 @@ export const createNode = (newNode: Partial<nodeType>) => {
     ...newNode,
     id: lastNode.id + 1,
   };
-  return fs.writeFileSync("./node.json", JSON.stringify(sanitizeNode));
+  return fs.writeFileSync(
+    `${__dirname}/node.json`,
+    JSON.stringify(sanitizeNode)
+  );
 };
 
 export const getOneNode = (id: number) => {
@@ -34,7 +38,7 @@ export const getOneNode = (id: number) => {
 export const deleteNode = (id: number) => {
   const nodes = getAllNodes();
   const newNodeList = nodes.filter((node) => node.id !== id);
-  fs.writeFileSync("./node.json", JSON.stringify(newNodeList));
+  fs.writeFileSync(`${__dirname}/node.json`, JSON.stringify(newNodeList));
 };
 
 export const updateNode = (id: number, newNode: Partial<nodeType>) => {
@@ -43,7 +47,9 @@ export const updateNode = (id: number, newNode: Partial<nodeType>) => {
     if (node.id === id) {
       return { ...newNode, id };
     }
+
     return node;
   });
-  fs.writeFileSync("./node.json", JSON.stringify(newNodeList));
+  console.log(newNodeList);
+  fs.writeFileSync(`${__dirname}/node.json`, JSON.stringify(newNodeList));
 };

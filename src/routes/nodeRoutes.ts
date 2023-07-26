@@ -5,12 +5,14 @@ import {
   getOneNode,
   deleteNode,
   updateNode,
-} from "@src/controller/nodeController";
+} from "../controller/nodeController";
 
 const router = express.Router();
 
-router.get("/api/v1/node", getAllNodes);
-router.get("/api/v1/node/:id", getOneNode);
-router.delete("/api/v1/node/:id", deleteNode);
-router.put("/api/v1/node/:id", updateNode);
-router.post("/api/v1/node", createNode);
+router.get("/", getAllNodes);
+router.get("/:id", getOneNode);
+router.delete("/:id", deleteNode);
+router.patch("/:id", updateNode);
+router.post("/", createNode);
+
+export default router;

@@ -1,4 +1,4 @@
-import { nodeType } from "@src/@types/nodes";
+import { nodeType } from "../@types/nodes";
 import { idText } from "typescript";
 
 export function validateNodeType(data: any): data is Partial<nodeType> {
@@ -16,7 +16,7 @@ export function validNodeParams(params: any) {
   );
 
   if (invalidParams.length > 0) {
-    return true;
+    return false;
   }
-  return false;
+  return true;
 }

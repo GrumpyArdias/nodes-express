@@ -1,6 +1,5 @@
 import express from "express";
 import { validateNodeType, validNodeParams } from "../utils/nodeValidations";
-import { nodeType } from "../@types/nodes";
 import {
   getAllNodes as getAllNodesService,
   createNode as createNodeService,
